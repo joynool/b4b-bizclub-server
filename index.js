@@ -19,10 +19,18 @@ async function run ()
         const database = client.db('b4bBizClub');
         const usersCollect = database.collection('users');
         const rulesCollect = database.collection('rules');
+        const committeeCollect = database.collection('committee');
 
         app.get('/rules', async (req, res) =>
         {
             const cursor = rulesCollect.find({});
+            const result = await cursor.toArray();
+            res.send(result);
+        });
+
+        app.get('/committee', async (req, res) =>
+        {
+            const cursor = committeeCollect.find({});
             const result = await cursor.toArray();
             res.send(result);
         });
