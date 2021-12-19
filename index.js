@@ -18,7 +18,14 @@ async function run ()
         await client.connect();
         const database = client.db('b4bBizClub');
         const usersCollect = database.collection('users');
-        console.log('hitting the database')
+        const rulesCollect = database.collection('rules');
+
+        app.get('/rules', async (req, res) =>
+        {
+            const cursor = rulesCollect.find({});
+            const result = await cursor.toArray();
+            res.send(result);
+        });
     }
     finally {
         //await client.close();
